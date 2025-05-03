@@ -1,0 +1,41 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+</IfModule>
+<IfModule mod_brotli.c>
+    # Enable Brotli compression
+    AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css application/javascript application/json application/xml application/xml+rsstext/javascript
+  
+    # Set Brotli compression level (optional, range is 0-11)
+    #BrotliCompressionQuality 10
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    # HTML - Frequent updates
+    ExpiresByType text/html "access plus 1 day"
+    
+    # CSS & JS - Moderate updates
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+
+    # Images - Rare updates
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+
+    # Fonts - Very rare updates
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+
+    # JSON - Frequent updates (i18n, configs)
+    ExpiresByType application/json "access plus 1 day"
+</IfModule>
